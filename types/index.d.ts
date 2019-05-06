@@ -1,4 +1,4 @@
-import DragAndDropContext from './DragAndDropContext';
+import { DragAndDropProvider } from './DragAndDropContext';
 import Draggable from './Draggable';
 import DropView from './DropView';
-export { DragAndDropContext, Draggable, DropView };
+export { DragAndDropProvider, Draggable, DropView };

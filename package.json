@@ -1,6 +1,6 @@
 {
   "name": "@jgoday/react-native-dragndrop",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React native drag and drop views.",
   "repository": "https://github.com/jgoday/react-native-drag-and-drop",
   "author": {
