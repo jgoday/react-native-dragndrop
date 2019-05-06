@@ -1,0 +1,35 @@
+{
+  "name": "react-native-dragndrop",
+  "version": "0.1.1",
+  "private": true,
+  "description": "React native drag and drop views.",
+  "repository": "https://github.com/jgoday/react-native-drag-and-drop",
+  "author": {
+    "name": "Javier Goday",
+    "email": "jgoday@gmail.com"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-native": "^0.59.5"
+  },
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.4",
+    "@babel/runtime": "7.4.4",
+    "@types/jest": "24.0.12",
+    "@types/react": "^16.8.16",
+    "@types/react-native": "0.57.51",
+    "@types/react-redux": "^7.0.8",
+    "@types/react-test-renderer": "16.8.1",
+    "babel-jest": "24.7.1",
+    "jest": "24.7.1",
+    "metro-react-native-babel-preset": "0.54.0",
+    "react-test-renderer": "16.8.3",
+    "typescript": "3.4.5"
+  }
+}
