@@ -1,5 +1,8 @@
 # react-native-dragndrop
 
+## Screenshots
+![screenshot](https://raw.githubusercontent.com/jgoday/react-native-dragndrop/master/public/dragndrop.gif)
+
 ## Getting started
 `$ npm install react-native-dragndrop --save`
 
