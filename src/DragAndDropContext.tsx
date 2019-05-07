@@ -15,6 +15,8 @@ export interface IState {
 
     dropPositions: IDropPositions;
 
+    dragOverTarget?: string;
+
     dropTarget?: string;
     dropData?: any;
 }
@@ -28,6 +30,8 @@ const REGISTER_DROP_AREA = 'REGISTER DROP AREA';
 const UNREGISTER_DROP_AREA = 'UNREGISTER DROP AREA';
 const UPDATE_DROP_AREA = 'UPDATE DROP AREA';
 const DROP_EVENT = 'DROP EVENT';
+const DRAG_OVER_EVENT = 'DRAG OVER EVENT';
+const CLEAR = 'CLEAR';
 
 export interface IProps {
     children: any;
@@ -73,6 +77,13 @@ const reducer = (state: IState, action: IAction<any>) => {
             case DROP_EVENT:
                 const v = getPayload<{id: string, data?: any}>(action);
                 return { ... state, dropTarget: v.id, dropData: v.data };
+
+            case DRAG_OVER_EVENT:
+                const d = getPayload<{id: string, data?: any}>(action);
+                return { ... state, dragOverTarget: d.id }
+
+            case CLEAR:
+                return { ... state, dragOverTarget: undefined  };
 
             default: return state;
         }
@@ -124,6 +135,21 @@ export const dropEvent = (id: string, data?: any) => {
             id,
             data
         }
+    }
+}
+
+export const dragOverEvent = (id: string, data?: any) => {
+    return {
+        type: DRAG_OVER_EVENT,
+        payload: {
+            id, data
+        }
+    }
+}
+
+export const clear = () => {
+    return {
+        type: CLEAR
     }
 }
 

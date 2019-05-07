@@ -51,7 +51,9 @@ Wrapper to receive a drop event over an existing component.
 | Prop        | Type     | Optional | Default | Description |
 | ----------  | -------- | -------- | ------- | ----------- |
 | `onDrop`    | Function | Yes      |         | Called when a drop event is generated over the component. It receives the Draggable data property. |
-| `style`     | any      | Yes      |         | Additional style to the DropView wrapper Component.            |
+| `style`     | any      | Yes      |         | Additional style to the DropView wrapper component.            |
+| `highlight` | bool     | Yes      |         | Should the component react to a drag over event.                |
+| `highlightStyle` | any | Yes      |         | Additional style when a drag event is over the component.       |
 
 
 ### Draggable
