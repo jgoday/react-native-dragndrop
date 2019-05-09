@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import {
-    DragAndDropContext, registerDropArea, unregisterDropArea, updateDropArea
+    DragAndDropContext, unregisterDropArea, updateDropArea
 } from './DragAndDropContext';
 
 export interface IProps {
@@ -28,9 +28,7 @@ export default function DropArea(props: IProps) {
     const [ highlight, setHighlight ] = React.useState<any>({});
 
     React.useEffect(() => {
-        dispatch(registerDropArea(wrapperEl.current));
-
-        return () => dispatch(unregisterDropArea(wrapperEl.current));
+        return () => dispatch(unregisterDropArea(id));
     }, []);
 
     React.useEffect(() => {

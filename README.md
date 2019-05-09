@@ -67,3 +67,4 @@ Wrapper to convert a component into a draggable view. It can optionally hold a `
 | ----------  | ---- | -------- | ------- | ----------- |
 | `data`      | any  | Yes      |         | Additional data that will be passed to the drop event.  |
 | `style`     | any  | Yes      |         | Additional style to the Draggable wrapper Component.  |
+| `onMove`    | Function  | Yes      |         |  Called when the draggable view is moved. It passes the pageX and pageY coordinates. |

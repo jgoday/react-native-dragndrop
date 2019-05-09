@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native';
 
 interface ILayoutItem {
     x: number;
@@ -11,8 +10,6 @@ interface ILayoutItem {
 type IDropPositions = { [name: string] : ILayoutItem };
 
 export interface IState {
-    dropViews: View[];
-
     dropPositions: IDropPositions;
 
     dragOverTarget?: string;
@@ -26,19 +23,18 @@ export interface IAction<T> {
     payload?: T;
 }
 
-const REGISTER_DROP_AREA = 'REGISTER DROP AREA';
 const UNREGISTER_DROP_AREA = 'UNREGISTER DROP AREA';
 const UPDATE_DROP_AREA = 'UPDATE DROP AREA';
 const DROP_EVENT = 'DROP EVENT';
 const DRAG_OVER_EVENT = 'DRAG OVER EVENT';
 const CLEAR = 'CLEAR';
+const CLEAR_DRAG_EVENTS = 'CLEAR DRAG EVENTS';
 
 export interface IProps {
     children: any;
 }
 
 let initialState: IState = {
-    dropViews: [],
     dropPositions: {}
 };
 
@@ -59,14 +55,15 @@ export const DragAndDropContext = React.createContext<IDragAndDropContext>({
 const reducer = (state: IState, action: IAction<any>) => {
     if (action) {
         switch (action.type) {
-            case REGISTER_DROP_AREA:
-                const viewToAdd = getPayload<View>(action);
-                return { ... state, dropViews: state.dropViews.concat([viewToAdd]) };
-
             case UNREGISTER_DROP_AREA:
-                const viewToRemove = getPayload<View>(action);
-                return { ... state, dropViews: state.dropViews.filter(d => d != viewToRemove) };
+                const viewToRemove = getPayload<string>(action);
+                const newPositions = state.dropPositions;
+                delete newPositions[viewToRemove];
 
+                return {
+                    ... state,
+                    dropPositions: newPositions
+                };
 
             case UPDATE_DROP_AREA:
                 const pos = getPayload<any>(action);
@@ -82,8 +79,11 @@ const reducer = (state: IState, action: IAction<any>) => {
                 const d = getPayload<{id: string, data?: any}>(action);
                 return { ... state, dragOverTarget: d.id }
 
+            case CLEAR_DRAG_EVENTS:
+                return { ... state, dragOverTarget: undefined };
+
             case CLEAR:
-                return { ... state, dragOverTarget: undefined  };
+                return { ... state, dropTarget: undefined, dropData: undefined, dragOverTarget: undefined  };
 
             default: return state;
         }
@@ -100,21 +100,10 @@ export function DragAndDropProvider(props: IProps) {
     return (<DragAndDropContext.Provider value={value}>{props.children}</DragAndDropContext.Provider>);
 }
 
-export const registerDropArea = (element: View|null) => {
-    if (element != null) {
-        return {
-            type: REGISTER_DROP_AREA,
-            payload: element
-        }
-    }
-}
-
-export const unregisterDropArea = (element: View|null) => {
-    if (element != null) {
-        return {
-            type: UNREGISTER_DROP_AREA,
-            payload: element
-        }
+export const unregisterDropArea = (id: string) => {
+    return {
+        type: UNREGISTER_DROP_AREA,
+        payload: id
     }
 }
 
@@ -144,6 +133,12 @@ export const dragOverEvent = (id: string, data?: any) => {
         payload: {
             id, data
         }
+    }
+}
+
+export const clearDragEvents = () => {
+    return {
+        type: CLEAR_DRAG_EVENTS
     }
 }
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View } from 'react-native';
 interface ILayoutItem {
     x: number;
     y: number;
@@ -10,8 +9,8 @@ declare type IDropPositions = {
     [name: string]: ILayoutItem;
 };
 export interface IState {
-    dropViews: View[];
     dropPositions: IDropPositions;
+    dragOverTarget?: string;
     dropTarget?: string;
     dropData?: any;
 }
@@ -28,13 +27,9 @@ interface IDragAndDropContext {
 }
 export declare const DragAndDropContext: React.Context<IDragAndDropContext>;
 export declare function DragAndDropProvider(props: IProps): JSX.Element;
-export declare const registerDropArea: (element: View) => {
+export declare const unregisterDropArea: (id: string) => {
     type: string;
-    payload: View;
-};
-export declare const unregisterDropArea: (element: View) => {
-    type: string;
-    payload: View;
+    payload: string;
 };
 export declare const updateDropArea: (id: string, layout: {
     x: number;
@@ -59,6 +54,19 @@ export declare const dropEvent: (id: string, data?: any) => {
         id: string;
         data: any;
     };
+};
+export declare const dragOverEvent: (id: string, data?: any) => {
+    type: string;
+    payload: {
+        id: string;
+        data: any;
+    };
+};
+export declare const clearDragEvents: () => {
+    type: string;
+};
+export declare const clear: () => {
+    type: string;
 };
 export declare const DragAndDropConsumer: React.ExoticComponent<React.ConsumerProps<IDragAndDropContext>>;
 declare const _default: {
