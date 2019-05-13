@@ -42,8 +42,15 @@ export default function DropArea(props: IProps) {
                 : {});
     }, [ state.dropTarget, state.dragOverTarget ]);
 
+    const measure = () => {
+        wrapperEl.current
+        && wrapperEl.current.measureInWindow((x: number, y: number, width: number, height: number) => {
+            dispatch(updateDropArea(id, {x, y, width, height}));
+        })
+    };
+
     return <View
-        onLayout={e => dispatch(updateDropArea(id, e.nativeEvent.layout))}
+        onLayout={_ => measure()}
         ref={wrapperEl}
         style={[highlight, props.style]}>
         {props.children}
